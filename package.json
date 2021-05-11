@@ -13,7 +13,7 @@
     "lint": "eslint \"{src/**/*.ts, src/**/*.tsx}\""
   },
   "dependencies": {
-    "class-validator": "0.13.0"
+    "class-validator": "^0.13.1"
   },
   "devDependencies": {
     "@types/react": "17.0.0",

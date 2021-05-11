@@ -1,3 +1,8 @@
+![npm](https://img.shields.io/npm/v/@mertsolak/translator)
+![license](https://img.shields.io/npm/l/@mertsolak/translator)
+![size](https://img.shields.io/bundlephobia/min/@mertsolak/translator)
+![issue](https://img.shields.io/github/issues/mert-solak/translator)
+
 ## Installation
 
 Use node package manager to install @mertsolak/translator
