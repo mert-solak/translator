@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import React, { createContext, useCallback, useEffect, useMemo, useReducer } from 'react';
 
 import { LanguageFiles, Props, State, Action, TranslatorContextValue } from '@interfaces/main.interface';
 
@@ -30,10 +30,15 @@ const reducer = (state: State, action: Action) => {
 export const TranslatorProvider: React.FC<Props> = ({ children, languageFiles, languagePreference }) => {
   const [state, dispatch] = useReducer(reducer, { ...initialState, languageFiles, languagePreference });
 
-  const setLanguageFiles = (newLanguageFiles: LanguageFiles) =>
-    dispatch({ type: 'SET_LANGUAGE_FILES', payload: newLanguageFiles });
-  const setLanguagePreference = (newLanguagePreference: keyof LanguageFiles) =>
-    dispatch({ type: 'SET_LANGUAGE_PREFERENCE', payload: newLanguagePreference });
+  const setLanguageFiles = useCallback(
+    (newLanguageFiles: LanguageFiles) => dispatch({ type: 'SET_LANGUAGE_FILES', payload: newLanguageFiles }),
+    [],
+  );
+  const setLanguagePreference = useCallback(
+    (newLanguagePreference: keyof LanguageFiles) =>
+      dispatch({ type: 'SET_LANGUAGE_PREFERENCE', payload: newLanguagePreference }),
+    [],
+  );
 
   useEffect(() => {
     setLanguagePreference(languagePreference);
@@ -43,9 +48,14 @@ export const TranslatorProvider: React.FC<Props> = ({ children, languageFiles, l
     setLanguageFiles(languageFiles);
   }, [languageFiles]);
 
-  return (
-    <TranslatorContext.Provider value={{ setLanguageFiles, setLanguagePreference, ...state }}>
-      {children}
-    </TranslatorContext.Provider>
+  const Provider = useMemo(
+    () => (
+      <TranslatorContext.Provider value={{ setLanguageFiles, setLanguagePreference, ...state }}>
+        {children}
+      </TranslatorContext.Provider>
+    ),
+    [state],
   );
+
+  return <>{Provider}</>;
 };

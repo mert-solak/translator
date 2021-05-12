@@ -47,7 +47,7 @@ Initialize it in the root component
 ```typescript
 // Root.tsx
 
-import { TranslatorProvider } from '@mertsolak/react-template';
+import { TranslatorProvider } from '@mertsolak/translator';
 
 import { languageFiles } from './languageFiles';
 
@@ -69,7 +69,7 @@ Use it anywhere
 ```typescript
 // AnyComponent.tsx
 
-import { useTranslator } from '@mertsolak/react-template';
+import { useTranslator } from '@mertsolak/translator';
 
 import { LanguageFiles } from './types'; // Type is needed for auto completion
 
