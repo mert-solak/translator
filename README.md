@@ -35,17 +35,19 @@ Create a language file
 Export type of the language file
 
 ```typescript
-  // types.ts
+// types.ts
 
-  import { languageFiles } from './languageFiles';
+import { languageFiles } from './languageFiles';
 
-  export type = typeof languageFiles;
+export type LanguageFiles = typeof languageFiles;
 ```
 
 Initialize it in the root component
 
 ```typescript
 // Root.tsx
+
+import { useState } from 'react';
 
 import { TranslatorProvider } from '@mertsolak/translator';
 
@@ -64,7 +66,7 @@ const Root = () => {
 export default Root;
 ```
 
-Use it anywhere
+Use it everywhere
 
 ```typescript
 // AnyComponent.tsx
@@ -81,6 +83,35 @@ const HomePage = () => {
       <p>{translator.title}</p>
     </div>
   );
+};
+
+export default HomePage;
+```
+
+## Additional
+
+languageFiles and languagePreference can be updated in everywhere.
+
+```typescript
+// HomePage.tsx
+
+import { useEffect, useState, useContext } from 'react';
+
+import { TranslatorContext } from '@mertsolak/translator';
+
+import { newLanguageFiles } from './newLanguageFiles';
+
+const HomePage = () => {
+  const [newLanguagePreference, setNewLanguagePreference] = useState('language1');
+
+  const { setLanguageFiles, setLanguagePreference } = useContext(TranslatorContext);
+
+  useEffect(() => {
+    setLanguageFiles(newLanguageFiles);
+    setLanguagePreference(newLanguagePreference);
+  }, []);
+
+  return <p>Home Page</p>;
 };
 
 export default HomePage;
