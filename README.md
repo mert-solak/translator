@@ -1,6 +1,6 @@
 ## Translator
 
-Lightweight translator to switch between multiple language files with **auto complete** for React.
+Lightweight translator to switch between multiple language files with **auto complete** and **input validation** for React.
 
 ![npm](https://img.shields.io/npm/v/@mertsolak/translator)
 ![license](https://img.shields.io/npm/l/@mertsolak/translator)
@@ -34,6 +34,10 @@ Create a language file
       }
     }
   };
+
+  export const options = {
+    validateLanguageFiles: true
+  };
 ```
 
 Export type of the language file
@@ -55,13 +59,13 @@ import { useState } from 'react';
 
 import { TranslatorProvider } from '@mertsolak/translator';
 
-import { languageFiles } from './languageFiles';
+import { languageFiles, options } from './languageFiles';
 
 const Root = () => {
   const [currentLanguage, setCurrentLanguage] = useState('language1'); // Also redux can be used
 
   return (
-    <TranslatorProvider languageFiles={languageFiles} languagePreference={currentLanguage}>
+    <TranslatorProvider languageFiles={languageFiles} languagePreference={currentLanguage} options={options}>
       <App />
     </TranslatorProvider>
   );
