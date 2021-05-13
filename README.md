@@ -1,3 +1,7 @@
+## Translator
+
+Lightweight translator to switch between multiple language files with **auto complete** for React.
+
 ![npm](https://img.shields.io/npm/v/@mertsolak/translator)
 ![license](https://img.shields.io/npm/l/@mertsolak/translator)
 ![size](https://img.shields.io/bundlephobia/min/@mertsolak/translator)
