@@ -1,10 +1,10 @@
 import { isDefined } from 'class-validator';
 import { useContext, useEffect, useState } from 'react';
 
-import { CustomError } from '@utils/error.util';
-import { ErrorsEnum } from '@enums/errors.enum';
-import { LanguageFiles, TranslatorContextValue } from '@interfaces/main.interface';
-import { TranslatorContext } from '@contexts/translator.context';
+import { CustomError } from '../utils/error.util';
+import { ErrorsEnum } from '../enums/errors.enum';
+import { LanguageFiles, TranslatorContextValue } from '../interfaces/main.interface';
+import { TranslatorContext } from '../contexts/translator.context';
 
 const useTranslator = <L extends LanguageFiles>(section: keyof L[keyof L]): L[keyof L][keyof L[keyof L]] => {
   const { languageFiles, languagePreference } = useContext(TranslatorContext) as Omit<
@@ -16,11 +16,7 @@ const useTranslator = <L extends LanguageFiles>(section: keyof L[keyof L]): L[ke
   };
 
   if (!isDefined(languageFiles)) {
-    throw new CustomError(ErrorsEnum[ErrorsEnum.FILES_NOT_FOUND]);
-  }
-
-  if (Object.keys(languageFiles).length < 1) {
-    throw new CustomError(ErrorsEnum[ErrorsEnum.WRONG_FILE_FORMAT]);
+    throw new CustomError(ErrorsEnum.LANGUAGE_FILES_NOT_DEFINED);
   }
 
   let initialPreference;
