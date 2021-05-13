@@ -34,10 +34,16 @@ Create a language file
       }
     }
   };
+```
 
-  export const options = {
-    validateLanguageFiles: true
-  };
+Create a config file
+
+```typescript
+// config.ts
+
+export const options = {
+  validateLanguageFiles: true,
+};
 ```
 
 Export type of the language file
@@ -59,7 +65,8 @@ import { useState } from 'react';
 
 import { TranslatorProvider } from '@mertsolak/translator';
 
-import { languageFiles, options } from './languageFiles';
+import { languageFiles } from './languageFiles';
+import { options } from './config';
 
 const Root = () => {
   const [currentLanguage, setCurrentLanguage] = useState('language1'); // Also redux can be used
